@@ -29,7 +29,9 @@ Some tips on running this code:
   
   (11) best_states.sql for top 10 states
   
-  (12) 
+  (12) hospital_variability.sql for the procedures with the highest variability
+  
+  (13) hospitals_and_patients.sql contains several sql statements to find the various correlations.
   
   
   
