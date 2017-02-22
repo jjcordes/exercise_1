@@ -1,0 +1,11 @@
+
+It was somewhat surprising to me that the mortality, readmission, and effective care scores were not strongly correlated with survey scores.  
+The mortality score was completely uncorrelated (actually had a slight negative correlation of -0.00832), while effective care (0.04546) and
+readmission score (0.127971) were slightly positively correlated.  A possible explanation for this is that the hospitals that provide the best
+care are also the most popular and therefore the most crowded.  To the extent that surveys reflect people feeling rushed and/or ignored, those negative
+responses could wash out the positive responses related to quality of care.
+
+On the other hand, the effective care scores for the procedures with the highest variability were strongly negatively correlated with survey scores.
+The top three measurements, in terms of variability, were Ed 1b, Ed 2b, and OP 18b, which had correlations of -0.37427, -0.34986, and -0.30879, respectively.
+So, the correlation was strongest for the procedures with the most variability.
+
