@@ -9,5 +9,10 @@ Some tips on running this code:
   
   (3) Make sure hadoop and postgres are running ("/root/start-hadoop.sh" and "/data/start_postgres.sh")
   
-  (4) Grab these files (either scp them or clone the github acct)
+  (4) log in as w205 user ("su - w205")
+  
+  (5) Grab these files (either scp them or clone the github acct - "git clone https://github.com/jjcordes/exercise_1.git") and put them in the /home/w205 directory
+  
+  (6) 
+  
   
