@@ -45,8 +45,8 @@ CREATE TABLE HospitalEffectiveCareScores AS
 DROP TABLE HospitalRatings;
 CREATE TABLE HospitalRatings AS 
 	select hospitalreadmissionscores.providerid, hospitalreadmissionscores.hospitalname, hospitalreadmissionscores.state, 
-	(hospitalmortalityscores.totalscore - 0.01) / 7.66 as MortScore, 
-	(hospitalreadmissionscores.totalscore - 0.06) / 0.74 as ReadScore, 
+	(hospitalmortalityscores.totalscore - 0.01) / 0.65 as MortScore, 
+	(hospitalreadmissionscores.totalscore + 0.06) / 0.74 as ReadScore, 
 	(hcahpsbasescore - 49.5) / 7.66 as SurveyScore, 
 	(newscore + 0.02) / 0.28 as CareScore 
 	FROM hospitalreadmissionscores JOIN hospitalmortalityscores on hospitalreadmissionscores.providerid = hospitalmortalityscores.providerid 

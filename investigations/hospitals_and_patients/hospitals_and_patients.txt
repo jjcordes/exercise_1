@@ -9,3 +9,10 @@ On the other hand, the effective care scores for the procedures with the highest
 The top three measurements, in terms of variability, were Ed 1b, Ed 2b, and OP 18b, which had correlations of -0.37427, -0.34986, and -0.30879, respectively.
 So, the correlation was strongest for the procedures with the most variability.
 
+mortcorr        readcorr        carecorr
+-0.00832156348802647    0.12797131484934823     0.04546048972587518
+Time taken: 47.814 seconds, Fetched: 1 row(s)
+
+ED 1b correlation with survey ratings...
+-0.37426604377632655
+Time taken: 81.131 seconds, Fetched: 1 row(s)

@@ -1,4 +1,8 @@
 
+Finding the measures with the greatest variability was straight forward.  I simply grouped by the measureID in the effective care table and sorted the procedures
+by the standard deviation.  The top three most variabile measures were ED1, ED2, and OP 18.
+
+measureid       measurename     average var
 ED_1b   ED1     276.96907216494844      103.9772874660485
 ED_2b   ED2     100.49224067519738      64.61623086138776
 OP_18b  OP 18   142.1953804347826       43.15691957172668
@@ -9,15 +13,5 @@ OP_2    Fibrinolytic Therapy Received Within 30 Minutes of ED Arrival   71.22222
 OP_23   Head CT results 71.28291536050156       19.92578053825412
 OP_30   Endoscopy/polyp surveillance: colonoscopy interval for patients with a history of adenomatous polyps - avoidance of inappropriate use   86.1901996370236        19.27928592661989
 OP_20   Door to diagnostic eval 25.83152468800868       18.218145009983544
-OP_21   Median time to pain med 53.021631102016954      18.119035415876
-STK_4   Thrombolytic Therapy    90.48168103448276       16.30348256434334
-IMM_3_OP_27_FAC_ADHPCT  Healthcare workers given influenza vaccination  84.48124695567462       14.91148633597847
-IMM_2   Immunization for influenza      91.78580201424711       13.29761753544573
-OP_1    Median Time to Fibrinolysis     26.296296296296298      11.879481682632917
-VTE_5   Warfarin therapy discharge instructions 93.08953168044077       11.089367779188736
-OP_4    Aspirin at Arrival      95.5394173093402        6.025932021677677
-OP_5    Median Time to ECG      8.308929327126535       5.311159356266651
-VTE_6   Hospital acquired potentially preventable venous thromboembolism        1.944267515923567       4.740234575052629
-PC_01   Percent of newborns whose deliveries were scheduled early (1-3 weeks early), when a scheduled delivery was not medically necessary      2.294490685691637       4.380631234434269
-OP_22   Left before being seen  1.786739380022962       1.7662276443493676
-EDV     Emergency department volume     NULL    NULL
+Time taken: 98.534 seconds, Fetched: 10 row(s)
+

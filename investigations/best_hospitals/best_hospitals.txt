@@ -1,4 +1,18 @@
 
+In order to rank the hospitals, I decided the factors that should be considered are: mortalities, readmissions, surveys, and effective care.  I decided against including
+other measures, such as timely care, since the best hospitals are presumably the most popular and that docking them for being crowded is a bit like saying Indiana
+Jones isn't a good ride at Disneyland because the wait time is an hour.  A lot of the hard work in terms of ratings had already been done, so I leveraged what
+I could.  Specifically, each hospital had mortality and readmission ratings of "better than national average", "worse than national average", or "same as the
+national average."  So for those ratings, I gave a score of 1, a -1, or a 0, respectively and then normalized the scores by subtracting the mean and dividing by 
+the standard deviation since I wanted each score to have an equal impact on the total score.  Similarly, for the effective care score, I converted the "effectnatcomp"
+rating into an appropriate 1, 0, or -1 score before normalizing.  The survey score was based on the average hcahpsbasescore field in the survey responses table.
+
+Once all of these scores were normalized and stored in the hospital ratings table, a simple SQL statement could be used to total the scores and rank the hospitals.
+The following hospitals were my top ten...
+
+
+Query output...
+hospitalratings.providerid      hospitalratings.hospitalname    hospitalratings.state   hospitalratings.mortscore       hospitalratings.readscore       hospitalratings.surveyscore     hospitalratings.carescore  totalscore
 370215  OKLAHOMA HEART HOSPITAL, LLC    OK      0.12924281984334204     3.972972972972973       3.8511749347258486      0.07142857142857142     8.024819298970735
 670049  NORTH CENTRAL SURGICAL CENTER LLP       TX      -0.0013054830287206266  -0.08108108108108109    3.720626631853786       3.642857142857143       7.281097210601127
 030103  MAYO CLINIC HOSPITAL    AZ      0.2597911227154047      3.972972972972973       2.93733681462141        0.07142857142857142     7.241529481738359
@@ -9,5 +23,5 @@
 260179  ST LUKES HOSPITAL       MO      0.12924281984334204     2.6216216216216215      -0.97911227154047       3.642857142857143       5.414609312781637
 050769  HOAG ORTHOPEDIC INSTITUTE       CA      -0.0013054830287206266  2.6216216216216215      2.6762402088772848      0.07142857142857142     5.367984918898757
 360266  MOUNT CARMEL NEW ALBANY SURGICAL HOSPITAL       OH      -0.0013054830287206266  2.6216216216216215      2.545691906005222       0.07142857142857142     5.237436616026694
-
+Time taken: 50.136 seconds, Fetched: 10 row(s)
 
