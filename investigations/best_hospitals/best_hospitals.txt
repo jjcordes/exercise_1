@@ -1,27 +1,70 @@
 
 In order to rank the hospitals, I decided the factors that should be considered are: mortalities, readmissions, surveys, and effective care.  I decided against including
 other measures, such as timely care, since the best hospitals are presumably the most popular and that docking them for being crowded is a bit like saying Indiana
-Jones isn't a good ride at Disneyland because the wait time is an hour.  A lot of the hard work in terms of ratings had already been done, so I leveraged what
+Jones isn't a good ride at Disneyland because the wait time is an hour.  A lot of the hard work in terms of ratings had already been done in the raw files, so I leveraged what
 I could.  Specifically, each hospital had mortality and readmission ratings of "better than national average", "worse than national average", or "same as the
 national average."  So for those ratings, I gave a score of 1, a -1, or a 0, respectively and then normalized the scores by subtracting the mean and dividing by 
-the standard deviation since I wanted each score to have an equal impact on the total score.  Similarly, for the effective care score, I converted the "effectnatcomp"
-rating into an appropriate 1, 0, or -1 score before normalizing.  The survey score was based on the average hcahpsbasescore field in the survey responses table.
+the standard deviation since I wanted each score to have an equal impact on the total score.  I preferred using these categorical ratings because they had already 
+gone through the trouble of determining significance and dealing with outliers, and so on. 
 
-Once all of these scores were normalized and stored in the hospital ratings table, a simple SQL statement could be used to total the scores and rank the hospitals.
+Similarly, for the effective care score, I converted the "effectnatcomp" rating into an appropriate 1, 0, or -1 score before normalizing.  The survey score was based on the 
+average hcahpsbasescore field in the survey responses table.
+
+Once all of these scores were normalized and stored in the hospital ratings table, the SQL statement in best_hospitals.sql can be used to rank the hospitals.  Originally,
+the SQL statement was very simple, but I wanted to include a measure of the variability or consistency of the ratings scores for each hospital to give a sense of certainty and 
+things got a bit hairy in the SELECT clause.  Rather than create a temp table and use joins to get the standard deviation between the columns, I decided to calculate
+it by hand in the SQL statement itself.  While the approach has the downside of putting a ridiculously complex field in the select statement, the resulting value is simple 
+to verify in the resultset (just put a few rows in Excel to check the calculation), so the lack of maintainability shouldn't be a problem.
+
+The total score is simply a total of the four sub-scores and should provide a balanced rating for the hospitals.  It's interesting to note that many of the top hospitals
+had below average survey scores.  It may be that hospitals can focus on keeping people alive and deal effectively with emergencies or do a lot of hand-holding and communicate
+with patients, but it's very difficult to do both.  I tend to prefer "keeping people alive" as the primary focus, so I'm okay with the survey scores getting outvoted here.
+
 The following hospitals were my top ten...
+
+Provider ID	Hospital				Mortality Score		Readmissions Score	Survey Score		Effective Care Score	Total Score (standard deviation)
+450358  	METHODIST HOSPITAL,THE  TX      	7.64611490175351        0.08435306817025628     0.3906659975423663      3.679492252889597       11.80 (3.06)
+100087  	SARASOTA MEMORIAL HOSPITAL      FL      3.0519470338235335      8.194057042058695       -0.0565894114943447     0.0859694451609719      11.28 (3.34)
+520138  	AURORA ST LUKES MEDICAL CENTER  WI      6.114725612443518       1.4359703971516626      -0.39203096827187794    3.679492252889597       10.84 (2.44)
+140258 		ALEXIAN BROTHERS MEDICAL CENTER 1  IL   4.583336323133526       2.787587726133069       -0.22431018988311133    3.679492252889597       10.83 (1.81)
+140281  	NORTHWESTERN MEMORIAL HOSPITAL  IL      7.64611490175351        0.08435306817025628     -0.6715655989198224     3.679492252889597       10.74 (3.30)
+390100  	LANCASTER GENERAL HOSPITAL      PA      1.5205577445135412      5.490822384095883       -0.22431018988311133    3.679492252889597       10.47 (2.16)
+050625  	CEDARS-SINAI MEDICAL CENTER     CA      6.114725612443518       1.4359703971516626      -0.7833794511790001     3.679492252889597       10.45 (2.57)
+030103  	MAYO CLINIC HOSPITAL    AZ      	3.0519470338235335      4.139205055114476       2.9064776733738658      0.0859694451609719      10.18 (1.50)
+330101  	NEW YORK-PRESBYTERIAN HOSPITAL  NY      9.177504191063502       -2.618881589792557      -0.9511002295677667     3.679492252889597       9.29 (4.58)
+260179  	ST LUKES HOSPITAL       MO      	1.5205577445135412      2.787587726133069       1.2292698894861995      3.679492252889597       9.22 (0.99)
+
 
 
 Query output...
-hospitalratings.providerid      hospitalratings.hospitalname    hospitalratings.state   hospitalratings.mortscore       hospitalratings.readscore       hospitalratings.surveyscore     hospitalratings.carescore  totalscore
-370215  OKLAHOMA HEART HOSPITAL, LLC    OK      0.12924281984334204     3.972972972972973       3.8511749347258486      0.07142857142857142     8.024819298970735
-670049  NORTH CENTRAL SURGICAL CENTER LLP       TX      -0.0013054830287206266  -0.08108108108108109    3.720626631853786       3.642857142857143       7.281097210601127
-030103  MAYO CLINIC HOSPITAL    AZ      0.2597911227154047      3.972972972972973       2.93733681462141        0.07142857142857142     7.241529481738359
-150160  ORTHOINDY HOSPITAL      IN      -0.0013054830287206266  2.6216216216216215      3.720626631853786       0.07142857142857142     6.412371341875258
-040147  ARKANSAS SURGICAL HOSPITAL      AR      -0.0013054830287206266  2.6216216216216215      3.5900783289817233      0.07142857142857142     6.2818230390031955
-420023  ST FRANCIS-DOWNTOWN     SC      -0.13185378590078328    5.324324324324325       -3.1984334203655354     3.642857142857143       5.636894260915149
-340002  MEMORIAL MISSION HOSPITAL AND ASHEVILLE SURGERY CE      NC      -0.13185378590078328    8.027027027027028       -2.545691906005222      0.07142857142857142     5.4209099065495945
-260179  ST LUKES HOSPITAL       MO      0.12924281984334204     2.6216216216216215      -0.97911227154047       3.642857142857143       5.414609312781637
-050769  HOAG ORTHOPEDIC INSTITUTE       CA      -0.0013054830287206266  2.6216216216216215      2.6762402088772848      0.07142857142857142     5.367984918898757
-360266  MOUNT CARMEL NEW ALBANY SURGICAL HOSPITAL       OH      -0.0013054830287206266  2.6216216216216215      2.545691906005222       0.07142857142857142     5.237436616026694
-Time taken: 50.136 seconds, Fetched: 10 row(s)
+450358  METHODIST HOSPITAL,THE  TX      7.64611490175351        0.08435306817025628     0.3906659975423663      3.679492252889597       11.80062622035573       3.0556413767612014
+100087  SARASOTA MEMORIAL HOSPITAL      FL      3.0519470338235335      8.194057042058695       -0.0565894114943447     0.0859694451609719      11.275384109548856      3.3423035809267763
+520138  AURORA ST LUKES MEDICAL CENTER  WI      6.114725612443518       1.4359703971516626      -0.39203096827187794    3.679492252889597       10.8381572942129        2.4381252240503533
+140258  ALEXIAN BROTHERS MEDICAL CENTER 1       IL      4.583336323133526       2.787587726133069       -0.22431018988311133    3.679492252889597       10.82610611227308       1.8073082259021085
+140281  NORTHWESTERN MEMORIAL HOSPITAL  IL      7.64611490175351        0.08435306817025628     -0.6715655989198224     3.679492252889597       10.73839462389354       3.302709961116685
+390100  LANCASTER GENERAL HOSPITAL      PA      1.5205577445135412      5.490822384095883       -0.22431018988311133    3.679492252889597       10.46656219161591       2.1600331930729415
+050625  CEDARS-SINAI MEDICAL CENTER     CA      6.114725612443518       1.4359703971516626      -0.7833794511790001     3.679492252889597       10.446808811305779      2.5651643863297884
+030103  MAYO CLINIC HOSPITAL    AZ      3.0519470338235335      4.139205055114476       2.9064776733738658      0.0859694451609719      10.183599207472847      1.4979969285900707
+330101  NEW YORK-PRESBYTERIAN HOSPITAL  NY      9.177504191063502       -2.618881589792557      -0.9511002295677667     3.679492252889597       9.287014624592775       4.581654141375987
+260179  ST LUKES HOSPITAL       MO      1.5205577445135412      2.787587726133069       1.2292698894861995      3.679492252889597       9.216907613022407       0.9867449516987935
+Time taken: 51.106 seconds, Fetched: 10 row(s)
+
+
+Appendix: Used for normalization of scores...
+select avg(hcahpsbasescore), stddev(hcahpsbasescore) FROM survey_responses WHERE hcahpsbasescore IS NOT NULL;
+20.012207527975583      17.886871434892708
+Time taken: 50.044 seconds, Fetched: 1 row(s)
+
+select avg(totalscore), stddev(totalscore) FROM hospitalmortalityscores WHERE totalscore IS NOT NULL;
+0.007073018514666112    0.6530018245397134
+Time taken: 51.655 seconds, Fetched: 1 row(s)
+
+select avg(totalscore), stddev(totalscore) FROM hospitalreadmissionscores WHERE totalscore IS NOT NULL;
+-0.062408986894112756   0.7398543793113476
+Time taken: 52.235 seconds, Fetched: 1 row(s)
+
+select avg(newscore), stddev(newscore) FROM hospitaleffectivecarescores WHERE newscore IS NOT NULL;
+-0.023923444976076555   0.2782784619731062
+Time taken: 58.737 seconds, Fetched: 1 row(s)
+
 

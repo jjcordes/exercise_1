@@ -17,7 +17,7 @@ Some tips on running this code:
   
   (7) "hive -f /home/w205/hive_base_ddl.sql" to import the data into 5 tables (hospitals, effective_care, readmissions, measures, and survey_responses)
   
-  (8) "hive -f /home/w205/transformations.sql" to create the working tables used to answer the questions
+  (8) "hive -f /home/w205/transformations.sql" to create the working tables used to answer the questions.  For simplicity, I put all of the transformations into one file.
   
   (9) The remaining sql files can be run from the command line such as "hive -f /home/w205/best_hospitals.sql", however, I like the flexibility and interaction of the hive command line, so these instructions will assume that approach.
   
@@ -34,4 +34,12 @@ Some tips on running this code:
   (13) hospitals_and_patients.sql contains several sql statements to find the various correlations.
   
   
-  
+ Other notes:
+ 
+ I provided two ER diagrams.  The logical ER diagram shows the data relationships as I think they exist in the "real world".  In other words, this is how I thought
+ about the data.  The second diagram shows the data relationships between the new tables constructed by the transformations.sql code to simplify the task of
+ answering the specific questions in Exercise 1.  I called it the "physical" ER diagram because it represents the tables actually used in answering the questions.
+ 
+ Each txt file contains the results of the queries and an explanation for how they answer the questions.
+ 
+ Enjoy!

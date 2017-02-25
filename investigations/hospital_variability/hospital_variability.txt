@@ -1,17 +1,32 @@
 
-Finding the measures with the greatest variability was straight forward.  I simply grouped by the measureID in the effective care table and sorted the procedures
+Finding the measures with the greatest variability was straight-forward.  I simply grouped by the measureID in the effective care table and sorted the procedures
 by the standard deviation.  The top three most variabile measures were ED1, ED2, and OP 18.
 
-measureid       measurename     average var
+Measure ID	Measure Name																Average Score (Standard deviation)
+ED_1b   	ED1     																276.97 (103.98)
+ED_2b   	ED2     																100.49 (64.62)
+OP_18b  	OP 18   																142.20 (43.16)
+OP_3b   	Median Time to Transfer to Another Facility for Acute Coronary Intervention     							58.33 (32.41)
+OP_31   	Improvement in Patient's Visual Function within 90 Days Following Cataract Surgery      						85.14 (29.27)
+OP_29   	Endoscopy/polyp surveillance: appropriate follow-up interval for normal colonoscopy in average risk patients    			79.93 (24.50)
+OP_2    	Fibrinolytic Therapy Received Within 30 Minutes of ED Arrival   									71.22 (21.46)
+OP_23   	Head CT results 															71.28 (19.93)
+OP_30   	Endoscopy/polyp surveillance: colonoscopy interval for patients with a history of adenomatous polyps - avoidance of inappropriate use   86.19 (19.28)
+OP_20   	Door to diagnostic eval 														25.83 (18.22)
+
+
+Query results...
+measureid       measurename     average standdev
 ED_1b   ED1     276.96907216494844      103.9772874660485
 ED_2b   ED2     100.49224067519738      64.61623086138776
 OP_18b  OP 18   142.1953804347826       43.15691957172668
 OP_3b   Median Time to Transfer to Another Facility for Acute Coronary Intervention     58.33249370277078       32.40961509657893
-OP_31   Improvement in Patient?s Visual Function within 90 Days Following Cataract Surgery      85.14035087719299       29.2661343094838
+OP_31   Improvement in Patient's Visual Function within 90 Days Following Cataract Surgery      85.14035087719299       29.2661343094838
 OP_29   Endoscopy/polyp surveillance: appropriate follow-up interval for normal colonoscopy in average risk patients    79.9287980260839        24.50305252578068
 OP_2    Fibrinolytic Therapy Received Within 30 Minutes of ED Arrival   71.22222222222223       21.4550923478395
 OP_23   Head CT results 71.28291536050156       19.92578053825412
 OP_30   Endoscopy/polyp surveillance: colonoscopy interval for patients with a history of adenomatous polyps - avoidance of inappropriate use   86.1901996370236        19.27928592661989
 OP_20   Door to diagnostic eval 25.83152468800868       18.218145009983544
-Time taken: 98.534 seconds, Fetched: 10 row(s)
+Time taken: 101.278 seconds, Fetched: 10 row(s)
+
 

@@ -43,14 +43,6 @@ CREATE TABLE HospitalEffectiveCareScores AS
 	from hospitals;
 
 DROP TABLE HospitalRatings;
-CREATE TABLE HospitalRatings AS 
-	select hospitalreadmissionscores.providerid, hospitalreadmissionscores.hospitalname, hospitalreadmissionscores.state, 
-	(hospitalmortalityscores.totalscore - 0.01) / 0.65 as MortScore, 
-	(hospitalreadmissionscores.totalscore + 0.06) / 0.74 as ReadScore, 
-	(hcahpsbasescore - 49.5) / 7.66 as SurveyScore, 
-	(newscore + 0.02) / 0.28 as CareScore 
-	FROM hospitalreadmissionscores JOIN hospitalmortalityscores on hospitalreadmissionscores.providerid = hospitalmortalityscores.providerid 
-	JOIN survey_responses ON hospitalreadmissionscores.providerid = survey_responses.providerid 
-	JOIN hospitaleffectivecarescores ON hospitalreadmissionscores.providerid = hospitaleffectivecarescores.providerid;
+CREATE TABLE HospitalRatings AS SELECT hospitalreadmissionscores.providerid, hospitalreadmissionscores.hospitalname, hospitalreadmissionscores.state, (hospitalmortalityscores.totalscore - 0.007073018514666112) / 0.6530018245397134 as MortScore, (hospitalreadmissionscores.totalscore + 0.062408986894112756) / 0.7398543793113476 as ReadScore, (hcahpsbasescore - 20.012207527975583) / 17.886871434892708 as SurveyScore, (newscore + 0.023923444976076555) / 0.2782784619731062 as CareScore FROM hospitalreadmissionscores JOIN hospitalmortalityscores on hospitalreadmissionscores.providerid = hospitalmortalityscores.providerid JOIN survey_responses ON hospitalreadmissionscores.providerid = survey_responses.providerid JOIN hospitaleffectivecarescores ON hospitalreadmissionscores.providerid = hospitaleffectivecarescores.providerid;
 	
 

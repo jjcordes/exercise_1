@@ -5,14 +5,31 @@ readmission score (0.127971) were slightly positively correlated.  A possible ex
 care are also the most popular and therefore the most crowded.  To the extent that surveys reflect people feeling rushed and/or ignored, those negative
 responses could wash out the positive responses related to quality of care.
 
-On the other hand, the effective care scores for the procedures with the highest variability were strongly negatively correlated with survey scores.
+The question was a bit tricky to interpret, but I took it as asking whether or not the scores for the most variable measures more correlated with survey
+scores than my ratings.  Surprisingly, the effective care scores for the procedures with the highest variability WERE strongly correlated with survey scores.
 The top three measurements, in terms of variability, were Ed 1b, Ed 2b, and OP 18b, which had correlations of -0.37427, -0.34986, and -0.30879, respectively.
-So, the correlation was strongest for the procedures with the most variability.
+So, the correlation was strongest for the procedures with the most variability.  The reason the correlation is negative is because the ED scores, for example,
+are median response times for emergency care (lower scores are better).  So, my conclusion is that of all the ratings and scores we've looked at, 
+the timeliness of emergency care is most highly correlated with survey scores.
 
+
+
+Query results...
 mortcorr        readcorr        carecorr
--0.00832156348802647    0.12797131484934823     0.04546048972587518
-Time taken: 47.814 seconds, Fetched: 1 row(s)
+-0.008321563488026406   0.1279713148493481      0.0454604897258751
+Time taken: 50.104 seconds, Fetched: 1 row(s)
+
 
 ED 1b correlation with survey ratings...
--0.37426604377632655
-Time taken: 81.131 seconds, Fetched: 1 row(s)
+-0.37426604377632666
+Time taken: 74.791 seconds, Fetched: 1 row(s)
+
+ED 2b correlation with survey ratings...
+-0.3498643335615036
+Time taken: 73.281 seconds, Fetched: 1 row(s)
+
+OP 18b correlation with survey ratings...
+-0.30878558665080474
+Time taken: 72.687 seconds, Fetched: 1 row(s)
+
+
